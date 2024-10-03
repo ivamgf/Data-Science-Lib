@@ -18,9 +18,9 @@ def determinante_3x3(matriz):
 
 # Exemplo de uso
 matriz_3x3 = [
-    [6, 1, 1],
-    [4, -2, 5],
-    [2, 8, 7]
+    [1, 10, 5],
+    [0, -11, 6],
+    [0, 0, 0]
 ]
 
 resultado_3x3 = determinante_3x3(matriz_3x3)
