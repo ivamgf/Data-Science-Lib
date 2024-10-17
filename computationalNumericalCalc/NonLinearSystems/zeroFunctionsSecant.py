@@ -1,9 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Definição da função
+# Solicita os coeficientes ao usuário
+coeficientes = []
+graus = [6, 5, 4, 3, 2, 1, 0]  # Graus correspondentes dos coeficientes (x^6, x^5, x^4, x^3, x^2, x, constante)
+
+for grau in graus:
+    coef = float(input(f"Digite o coeficiente para x^{grau}: "))
+    coeficientes.append(coef)
+
+# Função f(x) que calcula o valor do polinômio
 def f(x):
-    return 2 * x**3 - 11.7 * x**2 + 17.7 * x - 5
+    return sum(coef * x**i for i, coef in enumerate(reversed(coeficientes)))
 
 # Método da secante
 def secante(a, b, iteracoes):
@@ -17,9 +25,9 @@ def secante(a, b, iteracoes):
     return x_1, '{:.2f}%'.format(erro_rel)
 
 # Parâmetros do método
-x0 = 3
-x1 = 4
-num_iteracoes = 3
+x0 = float(input("Digite o primeiro chute (x0): "))
+x1 = float(input("Digite o segundo chute (x1): "))
+num_iteracoes = int(input("Digite o número de iterações: "))
 
 # Chamando o método da secante
 raiz_secante, erro_relativo = secante(x0, x1, num_iteracoes)
@@ -33,7 +41,7 @@ x_vals = np.linspace(0, 4, 1001)
 y_vals = f(x_vals)
 
 plt.style.use("dark_background")
-plt.plot(x_vals, y_vals, label='f(x) = 2x³ - 11.7x² + 17.7x - 5')
+plt.plot(x_vals, y_vals, label='f(x)')
 plt.axhline(0, color='gray', lw=0.5)
 plt.axvline(0, color='gray', lw=0.5)
 plt.scatter(raiz_secante, f(raiz_secante), color='red', zorder=5, label=f'Raiz: {raiz_secante:.6f}')  # Marca a raiz encontrada

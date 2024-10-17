@@ -1,9 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Função f(x)
+# Solicita os coeficientes ao usuário
+coeficientes = []
+graus = [6, 5, 4, 3, 2, 1, 0]  # Graus correspondentes dos coeficientes
+
+for grau in graus:
+    coef = float(input(f"Digite o coeficiente para x^{grau}: "))
+    coeficientes.append(coef)
+
+# Função f(x) que calcula o valor do polinômio
 def f(x):
-    return 2 * x**3 - 11.7 * x**2 + 17.7 * x - 5
+    return sum(coef * x**i for i, coef in enumerate(reversed(coeficientes)))
 
 # Intervalo para o gráfico
 x_anterior = 0
@@ -15,7 +23,7 @@ lista_y = f(lista_x)
 
 # Configuração do gráfico
 plt.style.use("dark_background")
-plt.plot(lista_x, lista_y, label='f(x) = 2x³ - 11.7x² + 17.7x - 5')
+plt.plot(lista_x, lista_y, label='f(x)')
 plt.axhline(0, color='gray', lw=0.5)  # Linha horizontal y=0
 plt.axvline(0, color='gray', lw=0.5)  # Linha vertical x=0
 plt.title("Gráfico de f(x)")
