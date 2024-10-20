@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import math
 
 eps = sys.float_info.epsilon
 
@@ -13,6 +14,6 @@ a = 2 + 1.e-16 == 2
 print(a)
 b = 1 + eps == 1
 print(b)
-d = (np.sqrt(5))**2 - 5
+d = (math.sqrt(5))**2
 print("Pode ser considerado 0 pois eh semelhante ao EPS")
 print(d)

@@ -2,9 +2,10 @@
 # Rule of rectangles
 
 import numpy as np
+import math
 
 # Definindo a função a ser integrada
-f = lambda x: np.cos(-x)
+f = lambda x: -x**2
 
 # Limites de integração
 a = 0

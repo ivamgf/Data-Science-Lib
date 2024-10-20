@@ -18,7 +18,6 @@ def trapezoidal_rule(f, a, b, N):
 
     return soma_trapezio
 
-
 # Exemplo de uso
 f = lambda x: np.cos(-x)  # Definindo a função a ser integrada
 a = 0  # Limite inferior
