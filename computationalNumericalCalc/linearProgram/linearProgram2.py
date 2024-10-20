@@ -2,16 +2,16 @@ import numpy as np
 from scipy.optimize import linprog
 
 # Coeficientes da função objetivo (minimizar -c, então usamos -c)
-c = [4, 5, 0]  # Coeficientes da função objetivo (maximizar z = 2x1 + 3x2 - 4x3)
+c = [280, 620, 0]  # Coeficientes da função objetivo (maximizar z = 2x1 + 3x2 - 4x3)
 
 # Matriz de coeficientes das restrições
 A = [
-    [1, 1, 3],  # x1 + x2 + 3x3 <= 15
-    [1, 2, -1],  # x1 + 2x2 - x3 <= 20
+    [0.75, 0.6, 0],  # x1 + x2 + 3x3 <= 15
+    [1, 1, 1],  # x1 + 2x2 - x3 <= 20
 ]
 
 # Lado direito das restrições
-b = [15, 20]
+b = [200, 300]
 
 # Restrições de não-negatividade (x >= 0)
 bounds = [(0, None)] * 3  # x1, x2, x3 >= 0
