@@ -4,7 +4,7 @@ plt.style.use("dark_background")
 
 # Parameters
 # EDO
-f = lambda t, s: np.exp(-t)
+f = lambda t, s: t**2 + 3
 
 # size
 h = 0.1

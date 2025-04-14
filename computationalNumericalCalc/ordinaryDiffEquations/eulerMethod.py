@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # EDO
 y = 3
 def f(t, u):
-    return 2**math.cos(y)
+    return y**2 + 3
 
     # tamanho e num. de passos
 

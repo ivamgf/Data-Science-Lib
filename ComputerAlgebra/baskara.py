@@ -1,6 +1,5 @@
 import math
 
-
 def bhaskara(a, b, c):
     # Calcula o discriminante (delta)
     delta = b ** 2 - 4 * a * c

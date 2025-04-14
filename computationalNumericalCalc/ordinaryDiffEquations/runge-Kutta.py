@@ -3,7 +3,7 @@ import math
 
 # Definição da equação diferencial ordinária de primeira ordem
 def dydx(x, y):
-    return math.sin(y)
+    return y**2 + 3
 
 # Método de Runge-Kutta de 4ª ordem
 def rungeKutta(x0, y0, x, h):
@@ -36,9 +36,9 @@ def interpolate(x_values, y_values, target_x):
 
 # Programa principal
 x0 = 0    # Valor inicial de x
-y0 = 0.2  # Valor inicial de y
-x = 3    # Valor de x no qual queremos encontrar y
-h = 0.30  # Tamanho do passo
+y0 = 3  # Valor inicial de y
+x = 0.4    # Valor de x no qual queremos encontrar y
+h = 0.10  # Tamanho do passo
 
 # Obter os valores de x e y a partir do método de Runge-Kutta
 x_values, y_values = rungeKutta(x0, y0, x, h)

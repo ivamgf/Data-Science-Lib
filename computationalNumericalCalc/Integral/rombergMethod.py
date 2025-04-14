@@ -5,7 +5,7 @@ import math
 
 def f(x):
     """Função a ser integrada."""
-    function = math.sin(x)**2
+    function = math.e - x
     return function # Defina a função desejada aqui
 
 def romberg_integration(f, a, b, tol=1e-6, max_steps=10):

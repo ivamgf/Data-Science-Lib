@@ -5,7 +5,7 @@ import numpy as np
 import math
 
 # Definindo a função a ser integrada
-f = lambda x: -x**2
+f = lambda x: math.e - x
 
 # Limites de integração
 a = 0
