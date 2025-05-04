@@ -1,3 +1,5 @@
+# Media
+
 def media_aritmetica(X):
     n = len(X)
     if n == 0:
