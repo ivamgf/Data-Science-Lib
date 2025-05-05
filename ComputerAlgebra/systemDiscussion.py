@@ -23,9 +23,9 @@ def analise_sistema(matriz_aumentada):
 
 # Exemplo de uso
 matriz_aumentada_1 = [
-    [2, 1, -1, 8],
-    [-3, -1, 2, -11],
-    [-2, 1, 2, -3]
+    [1, -2, 3, 1],
+    [1, 1, 1, 5],
+    [2, -4, 6, 3]
 ]
 
 matriz_aumentada_2 = [

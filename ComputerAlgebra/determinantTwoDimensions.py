@@ -1,3 +1,5 @@
+import math
+
 def determinante_2x2(matriz):
     if len(matriz) != 2 or len(matriz[0]) != 2:
         return "A matriz deve ser 2x2."
@@ -13,8 +15,8 @@ def determinante_2x2(matriz):
 
 # Exemplo de uso
 matriz_2x2 = [
-    [4, 6],
-    [3, 8]
+    [math.sqrt(6), math.sqrt(33)],
+    [math.sqrt(2), -1]
 ]
 
 resultado_2x2 = determinante_2x2(matriz_2x2)
