@@ -1,24 +1,41 @@
-# AES Decrypt
+# AES Decrypt with IV (Initialization Vector)
 
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import unpad
+# Imports
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.backends import default_backend
+import binascii
 
-# Ler chave
-with open("chave_aes.bin", "rb") as chave_file:
-    chave = chave_file.read()
+# Entrada do usuário
+mensagem_cifrada_hex = input("Digite a mensagem cifrada (hex): ")
+chave_hex = input("Digite a chave AES (hex, 16 bytes = 32 caracteres): ")
+iv_hex = input("Digite o IV (hex, 16 bytes = 32 caracteres): ")
 
-# Ler IV
-with open("iv_aes.bin", "rb") as iv_file:
-    iv = iv_file.read()
+# Conversão de hex para bytes
+try:
+    mensagem_cifrada = bytes.fromhex(mensagem_cifrada_hex)
+    chave = bytes.fromhex(chave_hex)
+    iv = bytes.fromhex(iv_hex)
+except ValueError:
+    print("Erro: Entrada em hexadecimal inválida.")
+    exit(1)
 
-# Ler mensagem cifrada
-with open("mensagem_cifrada_aes.bin", "rb") as msg_file:
-    mensagem_cifrada = msg_file.read()
+# Verificações básicas
+if len(chave) != 16 or len(iv) != 16:
+    print("Erro: A chave e o IV devem ter exatamente 16 bytes (32 caracteres hex).")
+    exit(1)
 
-# Criar objeto AES com a chave e o IV lidos
-cipher = AES.new(chave, AES.MODE_CBC, iv)
+# Criação do objeto Cipher
+cipher = Cipher(algorithms.AES(chave), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
 
-# Descriptografar e remover padding
-mensagem_decifrada = unpad(cipher.decrypt(mensagem_cifrada), AES.block_size)
+# Descriptografar
+mensagem_preenchida = decryptor.update(mensagem_cifrada) + decryptor.finalize()
 
-print("Mensagem descriptografada:", mensagem_decifrada.decode('utf-8'))
+# Remover padding
+unpadder = padding.PKCS7(128).unpadder()
+mensagem_original = unpadder.update(mensagem_preenchida) + unpadder.finalize()
+
+# Exibir resultado
+print("\nMensagem descriptografada:")
+print(mensagem_original.decode('utf-8'))

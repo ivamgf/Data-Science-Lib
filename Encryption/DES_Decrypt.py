@@ -1,20 +1,43 @@
 # DES Decrypt
 
-from Crypto.Cipher import DES
-from Crypto.Util.Padding import unpad
+# DES Decrypt com entrada da chave e da mensagem cifrada via console
 
-# Ler chave do arquivo
-with open("chave_des.bin", "rb") as chave_arquivo:
-    chave = chave_arquivo.read()
+from des import DesKey
+import binascii
 
-# Ler mensagem cifrada do arquivo
-with open("mensagem_cifrada_des.bin", "rb") as msg_arquivo:
-    mensagem_cifrada = msg_arquivo.read()
+# Função para remover o padding manual (PKCS5)
+def unpad(text_bytes):
+    padding_len = text_bytes[-1]
+    return text_bytes[:-padding_len]
 
-# Criar objeto de cifra com a chave lida
-cipher = DES.new(chave, DES.MODE_ECB)
+# Entrada da chave e da mensagem cifrada (em hexadecimal)
+chave_hex = input("Digite a chave em hexadecimal (16 caracteres): ").strip()
+mensagem_cifrada_hex = input("Digite a mensagem cifrada em hexadecimal: ").strip()
 
-# Descriptografar
-mensagem_decifrada = unpad(cipher.decrypt(mensagem_cifrada), DES.block_size)
+# Conversão de hex para bytes
+try:
+    chave = bytes.fromhex(chave_hex)
+    mensagem_cifrada = bytes.fromhex(mensagem_cifrada_hex)
+except ValueError:
+    print("Erro: valores hexadecimais inválidos.")
+    exit(1)
 
-print("Mensagem descriptografada:", mensagem_decifrada.decode('utf-8'))
+# Verificação do tamanho da chave
+if len(chave) != 8:
+    print("Erro: a chave precisa ter exatamente 8 bytes (16 caracteres hex).")
+    exit(1)
+
+# Criar objeto DesKey
+key = DesKey(chave)
+
+# Descriptografar (modo ECB)
+mensagem_preenchida = key.decrypt(mensagem_cifrada, padding=False)
+
+# Remover padding
+try:
+    mensagem_original = unpad(mensagem_preenchida)
+    print("\n Mensagem descriptografada:")
+    print(mensagem_original.decode('utf-8'))
+except Exception as e:
+    print("Erro ao remover padding ou decodificar mensagem:", str(e))
+
