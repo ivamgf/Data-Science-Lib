@@ -39,7 +39,7 @@ def visualize_graph(G, d):
     plt.show()
 
 def main():
-    d = 6  # altere a dimensão do hipercubo aqui
+    d = 3  # altere a dimensão do hipercubo aqui
 
     # Construir grafo
     G = build_hypercube(d)
